@@ -1,0 +1,49 @@
+name: 错误报告
+description: File a bug report.
+title: "[错误报告]: "
+labels: [ "" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        在提交前请确认: 
+         - 此项目使用 go 1.24.0 进行构建, 不支持 win7 及以下系统
+         - 使用的是[最新版本](https://github.com/lijiahangmax/orion-visor-agent/releases)
+         - 参考了[安装文档](https://visor.orionsec.cn/agent/install.html)
+         - 查阅了[常见问题](https://visor.orionsec.cn/agent/faq.html)
+         - 搜索了[已有 issue](https://github.com/lijiahangmax/orion-visor-agent/issues)
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      description: 在提交 issue 之前, 请确认你已经阅读并确认以下内容
+      options:
+        - label: 我使用的是最新版本 [最新版](https://github.com/lijiahangmax/orion-visor-agent/releases)
+          required: true
+        - label: 我使用官方文档进行部署 [安装文档](https://visor.orionsec.cn/agent/install.html)
+          required: true
+        - label: 我已检查了 [常见问题](https://visor.orionsec.cn/agent/faq.html) 并没有找到解决方法
+          required: true
+        - label: 我已搜索 [issue](https://github.com/lijiahangmax/orion-visor-agent/issues) 并没有找到相关问题
+          required: true
+  - type: input
+    id: version
+    attributes:
+      label: 当前程序版本
+      description: 遇到问题时程序所在的版本号
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 问题描述
+      description: 请详细描述你碰到的问题
+      placeholder: "问题描述"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 详细日志
+      description: 问题出现时的程序日志
+      render: bash

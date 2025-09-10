@@ -1,0 +1,26 @@
+# $${xxx} 为在系统安装时自动替换, 若不符合则可以手动替换
+
+# 服务端设置
+server:
+  # 服务端地址
+  url: http://$${SERVER_HOST}:9200/orion-visor/api
+  # 服务端 token
+  token: $${SERVER_TOKEN}
+
+# 日志设置
+zap:
+  # 日志文件名称
+  name: app.log
+  # 日志文件路径 ${home} 为家目录, ${context} 为上下文目录
+  path: ${context}/logs
+  # path: ${home}/orion/logs/metrics-agent
+  # 日志等级
+  level: info
+  # 单文件大小 MB
+  max-size: 16
+  # 保留的旧日志文件的最大数量
+  max-backups: 100
+  # 保留的旧日志文件的最大天数
+  max-age: 30
+  # 归档压缩
+  compress: true
