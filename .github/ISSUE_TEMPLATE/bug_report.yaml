@@ -3,15 +3,6 @@ description: File a bug report.
 title: "[错误报告]: "
 labels: [ "" ]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        在提交前请确认: 
-         - 此项目使用 go 1.24.0 进行构建, 不支持 win7 及以下系统
-         - 使用的是[最新版本](https://github.com/lijiahangmax/orion-visor-agent/releases)
-         - 参考了[安装文档](https://visor.orionsec.cn/agent/install.html)
-         - 查阅了[常见问题](https://visor.orionsec.cn/agent/faq.html)
-         - 搜索了[已有 issue](https://github.com/lijiahangmax/orion-visor-agent/issues)
   - type: checkboxes
     id: confirm
     attributes:
@@ -26,6 +17,8 @@ body:
           required: true
         - label: 我已搜索 [issue](https://github.com/lijiahangmax/orion-visor-agent/issues) 并没有找到相关问题
           required: true
+        - label: 此项目使用 go 1.24.0 进行构建, 不支持 win7 及以下系统
+          required: false
   - type: input
     id: version
     attributes:

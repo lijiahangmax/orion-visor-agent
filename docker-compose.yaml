@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+  agent:
+    image: registry.cn-hangzhou.aliyuncs.com/orionsec/orion-visor-agent:latest
+    container_name: orion-visor-agent-1
+    restart: on-failure:15
+    working_dir: /instance-agent
+    environment:
+      SERVER_API: http://service:9200/orion-visor/api
+      SERVER_TOKEN: pmqeHOyZaumHm0Wt
+      AGENT_KEY: agentKey
+    volumes:
+      - /data/orion-visor-space/orion-visor-agent/volumes/logs:/instance-agent/logs

@@ -5,6 +5,12 @@
 `orion-visor-agent` 是一个由 **Go 语言** 开发的轻量级系统监控探针, 能够实时收集并上报系统指标数据到 **orion-visor**。它支持多种操作系统, 包括 **Linux、Windows 和
 Darwin**, 并支持多种架构, 包括 **amd64 和 arm64**。该项目为 **闭源项目**。
 
+## 最新版本
+
+<a target="_blank" style="text-decoration: none !important;" href="https://github.com/lijiahangmax/orion-visor-agent/releases">
+  <img src="https://img.shields.io/github/v/release/lijiahangmax/orion-visor-agent" alt="release" />
+</a>
+
 ## 通信方式
 
 * 指标与心跳数据通过 **HTTP 主动上报** 给 `orion-visor`。(1min)
@@ -89,6 +95,7 @@ vim start.sh
 # 4. 重命名对应的启动文件 
 mv instance_agent_<os>_<arch> instance_agent
 # 5. 提权
+chmod +x instance_agent
 chmod +x ./start.sh
 # 6. 启动探针
 ./start.sh
@@ -99,3 +106,44 @@ tail -f logs/app.log
 ## 手动启动 (Windows)
 
 windows 因为平台限制, 不支持自动安装。手动安装流程同上
+
+## Docker 启动
+
+同时支持 `linux/amd64` 和 `linux/arm64` 架构
+
+> 支持以下源
+
+* lijiahangmax/*
+* ghcr.io/lijiahangmax/*
+* registry.cn-hangzhou.aliyuncs.com/orionsec/*
+
+```bash
+# 创建挂载目录
+mkdir -p /data/orion-visor-space/orion-visor-agent/volumes
+# 拉取最新版本
+docker pull registry.cn-hangzhou.aliyuncs.com/orionsec/orion-visor-agent:latest
+# 启动
+docker run -d \
+  --name orion-visor-agent-1 \
+  --restart=on-failure:15 \
+  -e SERVER_API="http://127.0.0.1:9200/orion-visor/api" \
+  -e SERVER_TOKEN="pmqeHOyZaumHm0Wt" \
+  -e AGENT_KEY="agentKey" \
+  -v /data/orion-visor-space/orion-visor-agent/volumes/logs:/instance-agent/logs \
+  registry.cn-hangzhou.aliyuncs.com/orionsec/orion-visor-agent:latest
+```
+
+## docker compose 启动
+
+在启动前需要修改 **环境变量**
+
+```bash
+# 修改环境变量
+vim docker-compose.yaml
+# 创建挂载目录
+mkdir -p /data/orion-visor-space/orion-visor-agent/volumes
+# 拉取最新版本
+docker compose pull
+# 启动
+docker compose up -d
+```
