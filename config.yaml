@@ -13,7 +13,7 @@ zap:
   name: app.log
   # 日志文件路径 ${home} 为家目录, ${context} 为上下文目录
   path: ${context}/logs
-  # path: ${home}/orion/logs/metrics-agent
+  # path: ${home}/orion/logs/instance-agent
   # 日志等级
   level: info
   # 单文件大小 MB
